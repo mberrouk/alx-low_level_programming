@@ -15,7 +15,7 @@ int computes_sqrt(int n, int sqrt)
 		return (-1);
 	if ((sqrt * sqrt) == n)
 		return (sqrt);
-	computes_sqrt(n, sqrt + 1);
+	return (computes_sqrt(n, sqrt + 1));
 }
 
 /**
