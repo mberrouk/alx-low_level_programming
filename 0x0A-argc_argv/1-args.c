@@ -17,7 +17,7 @@ void ft_putnbr(int n)
  *
  * Return: Always 0
  */
-int main(int ac)
+int main(int ac, char *av[])
 {
 	ft_putnbr(ac);
 	write(STDOUT_FILENO, "\n", 1);
