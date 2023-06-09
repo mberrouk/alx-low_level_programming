@@ -14,6 +14,7 @@ void ft_putnbr(int n)
 /**
  * main - Prints the number of arguments passed to the program
  * @ac: The number of arguments passed to the program
+ * @av: The  arguments
  *
  * Return: Always 0
  */
