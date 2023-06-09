@@ -59,6 +59,8 @@ char *skip(char *s2)
  */
 int wildcmp(char *s1, char *s2)
 {
+	char *tmp;
+
 	if (!*s1 && !*s2)
 		return (1);
 	if (*s2 == '*')
@@ -66,9 +68,31 @@ int wildcmp(char *s1, char *s2)
 		s2 = skip(s2);
 		if (!*s2)
 			return (1);
-		s1 = skip_stars(s1, *s2, _strlen(s1) - 1);
-		if (!s1)
-			return (0);
+		if (*s2 != *s1)
+		{
+			if (s1[1] == *s2)
+			{
+				tmp = s1 + 1;
+					if (wildcmp(tmp, s2))
+						return (1);
+			}
+			if (*s2 != *s1)
+				s1 = skip_stars(s1, *s2, _strlen(s1) - 1);
+				if (!s1)
+					return (0);
+		}
+		else
+		{
+				tmp = s1;
+					if (wildcmp(tmp, s2) == 1)
+						return (1);
+				else
+				{
+					s1 = skip_stars(s1, *s2, _strlen(s1) - 1);
+					if (!s1)
+						return (0);
+				}
+		}
 	}
 	else if (*s1 != *s2)
 		return (0);
