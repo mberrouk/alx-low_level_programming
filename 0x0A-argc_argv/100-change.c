@@ -23,7 +23,7 @@ int main(int ac, char *av[])
 	num = atoi(av[1]);
 	if (num <= 0)
 	{
-		write(STDOUT_FILENO, "Error\n", 6);
+		write(STDOUT_FILENO, "0\n", 2);
 		return (0);
 	}
 	j = 0;
