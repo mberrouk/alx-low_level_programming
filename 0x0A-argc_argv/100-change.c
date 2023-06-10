@@ -14,7 +14,7 @@ int main(int ac, char *av[])
 	int j;
 	int tab[5];
 	int i;
-	
+
 	if (ac != 2)
 	{
 		write(STDOUT_FILENO, "Error\n", 6);
