@@ -51,6 +51,7 @@ char *argstostr(int ac, char **av)
 			size++;
 		}
 		new[size] = '\n';
+		size++;
 	}
 	new[size] = '\0';
 	return (new);
