@@ -38,9 +38,12 @@ char **strtow(char *str)
 	size = 0;
 	for (i = 0; str[i]; i++)
 	{
-		if (str[i] != ' ' && (i - 1 > -1  && str[i - 1] == ' '))
+		if (str[i] != ' ' && ((i - 1 > -1  && str[i - 1] == ' ')
+			|| i == 0))
 			size++;
 	}
+	if (!size)
+		return (NULL);
 	words = malloc(sizeof(char *) * (size + 1));
 	if (!words)
 		return (NULL);
@@ -48,20 +51,19 @@ char **strtow(char *str)
 	k = 0;
 	for (i = 0; str[i]; i++)
 	{
-		for (; str[i] == ' '; i++)
-			;
-		if (!str[i])
-			break;
-		for (j = 0; str[i + j] && str[i + j] != ' '; j++)
-			;
-		words[k] = malloc(sizeof(char) * (j + 1));
-		if (!words[k])
-			return (free_grids(words));
-		for (j = 0; str[i + j] && str[i + j] != ' '; j++)
-			words[k][j] = str[i + j];
-		words[k][j] = '\0';
-		k++;
-		i += j;
+		if (str[i] != ' ')
+		{
+			for (j = 0; str[i + j] && str[i + j] != ' '; j++)
+				;
+			words[k] = malloc(sizeof(char) * (j + 1));
+			if (!words[k])
+				return (free_grids(words));
+			for (j = 0; str[i + j] && str[i + j] != ' '; j++)
+				words[k][j] = str[i + j];
+			words[k][j] = '\0';
+			k++;
+			i += (j - 1);
+		}
 	}
 	return (words);
 }
