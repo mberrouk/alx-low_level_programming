@@ -30,7 +30,7 @@ int ft_strlen(char *str)
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	int i, j, size;
+	unsigned int i, j, size;
 	char *s;
 
 	i = 0;
