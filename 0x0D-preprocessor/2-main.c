@@ -7,8 +7,9 @@ int main(void)
 	n = __FILE__;
 	while (*n)
 	{
-		write(STDOUT_FILENO, n , 1);
+		write(STDOUT_FILENO, n, 1);
 		n++;
 	}
 	write(STDOUT_FILENO, "\n", 1);
+	return (0);
 }
