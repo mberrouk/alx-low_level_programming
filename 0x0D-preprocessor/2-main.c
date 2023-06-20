@@ -6,7 +6,7 @@ int main(void)
 	int i;
 
 	i = 0;
-	n = __FILE__;
+	n = __BASE_FILE__;
 	if (!n)
 		return (0);
 	while (n[i])
