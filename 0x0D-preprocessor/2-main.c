@@ -1,12 +1,17 @@
 #include <unistd.h>
 
+/**
+ * main - program print file name
+ *
+ * Return: Always 0
+ */
 int main(void)
 {
 	char *n;
 	int i;
 
 	i = 0;
-	n = __BASE_FILE__;
+	n = __FILE__;
 	if (!n)
 		return (0);
 	while (n[i])
