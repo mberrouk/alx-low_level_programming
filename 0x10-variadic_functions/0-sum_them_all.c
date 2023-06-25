@@ -18,7 +18,7 @@ int sum_them_all(const unsigned int n, ...)
 	va_start(va, n);
 	if (!n)
 		return (0);
-	while (i < n)
+	while (i < (int)n)
 	{
 		res += va_arg(va, int);
 		i++;
