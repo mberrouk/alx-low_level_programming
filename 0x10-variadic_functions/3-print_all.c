@@ -19,7 +19,13 @@ void ft_putchar(va_list va)
  */
 void ft_putstr(va_list va)
 {
-	printf("%s", va_arg(va, char *));
+	char *str;
+
+	str = va_arg(va, char *);
+	if (str)
+		printf("%s", str);
+	else
+		printf("(nil)");
 }
 
 /**
