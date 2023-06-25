@@ -68,6 +68,8 @@ void print_all(const char * const format, ...)
 		{'i', ft_putint},
 		{'f', ft_putfloat}
 	};
+	char *sep = "";
+
 	i = 0;
 	va_start(va, format);
 	while (format && format[i])
@@ -77,13 +79,13 @@ void print_all(const char * const format, ...)
 		{
 			if (format[i] == chois[j].form)
 			{
+				printf("%s", sep);
 				chois[j].func(va);
+				sep = ", ";
 				break;
 			}
 			j++;
 		}
-		if (format[i + 1] && j < 4)
-			printf(", ");
 		i++;
 	}
 	va_end(va);
