@@ -21,7 +21,7 @@ void print_strings(const char *separator, const unsigned int n, ...)
 	{
 		str = va_arg(va, char *);
 		if (!str)
-			printf("nil");
+			printf("(nil)");
 		else
 			printf("%s", str);
 		if (separator && i < (int)n - 1)
@@ -29,4 +29,15 @@ void print_strings(const char *separator, const unsigned int n, ...)
 		i++;
 	}
 	printf("\n");
+}
+
+/**
+ * main - check the code
+ *
+ * Return: Always 0.
+ */
+int main(void)
+{
+    print_strings(0x00, 2, 0x00, "Django");
+    return (0);
 }
