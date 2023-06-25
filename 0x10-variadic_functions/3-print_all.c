@@ -23,9 +23,11 @@ void ft_putstr(va_list va)
 
 	str = va_arg(va, char *);
 	if (str)
+	{
 		printf("%s", str);
-	else
-		printf("(nil)");
+		return;
+	}
+	printf("(nil)");
 }
 
 /**
