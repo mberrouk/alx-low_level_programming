@@ -30,14 +30,3 @@ void print_strings(const char *separator, const unsigned int n, ...)
 	}
 	printf("\n");
 }
-
-/**
- * main - check the code
- *
- * Return: Always 0.
- */
-int main(void)
-{
-    print_strings(0x00, 2, 0x00, "Django");
-    return (0);
-}
