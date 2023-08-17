@@ -15,7 +15,7 @@ void free_dlistint(dlistint_t *head)
 		else
 		{
 			free(head);
-			return ;
+			return;
 		}
 	}
 }
