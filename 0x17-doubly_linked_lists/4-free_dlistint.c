@@ -10,6 +10,12 @@ void free_dlistint(dlistint_t *head)
 	{
 		if (head->prev)
 			free(head->prev);
-		head = head->next;
+		if (head->next)
+			head = head->next;
+		else
+		{
+			free(head);
+			return ;
+		}
 	}
 }
