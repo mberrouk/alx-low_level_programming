@@ -31,6 +31,46 @@ shash_table_t *shash_table_create(unsigned long int size)
 }
 
 /**
+ * continue_table_get - function for continue shash_table_get process
+ * @ht: hash table
+ * @new: new node
+ * @key: key
+ * Return: 1 or 0.
+ */
+int continue_table_get(shash_table_t *ht, shash_node_t *new, const char *key)
+{
+	shash_node_t *tmp;
+
+	if (!ht->shead)
+	{
+		new->sprev = NULL;
+		new->snext = NULL;
+		ht->stail = new;
+		ht->shead = new;
+		return (1);
+	}
+	if (strcmp(key, ht->shead->key) < 0)
+	{
+		new->sprev = NULL;
+		new->snext = ht->shead;
+		ht->shead->sprev = new;
+		ht->shead = new;
+		return (1);
+	}
+	for (tmp = ht->shead; tmp->snext && strcmp(tmp->snext->key, key) < 0;
+			tmp = tmp->snext)
+		;
+	new->sprev = tmp;
+	new->snext = tmp->snext;
+	if (!tmp->snext)
+		ht->stail = new;
+	else
+		tmp->snext->sprev = new;
+	tmp->snext = new;
+	return (1);
+}
+
+/**
  * shash_table_set - adds an element to the hash table.
  * @ht: is the hash table you want to add or update the key/value to.
  * @key: is the key. key can not be an empty string.
@@ -55,8 +95,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 			free(tmp->value);
 			tmp->value = strdup(value);
 			if (!tmp->value)
-				return (0);
-			return (1);
+			return (0);
+		return (1);
 		}
 	}
 	new = malloc(sizeof(shash_node_t));
@@ -73,34 +113,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		free(new);
 		return (0);
 	}
-	if (!ht->shead)
-	{
-		new->sprev = NULL;
-		new->snext = NULL;
-		ht->stail = new;
-		ht->shead = new;
-	}
-	else if (strcmp(key, ht->shead->key) < 0)
-	{
-		new->sprev = NULL;
-		new->snext = ht->shead;
-		ht->shead->sprev = new;
-		ht->shead = new;
-	}
-	else 
-	{
-		for (tmp = ht->shead; tmp->snext && strcmp(tmp->snext->key, key) < 0; \
-			tmp = tmp->snext)
-			;
-		new->sprev = tmp;
-		new->snext = tmp->snext;
-		if (!tmp->snext)
-			ht->stail = new;
-		else
-			tmp->snext->sprev = new;
-		tmp->snext = new;
-	}
-	return (1);
+	return (continue_table_get(ht, new, key));
 }
 
 /**
@@ -152,7 +165,7 @@ void shash_table_print(const shash_table_t *ht)
 }
 
 /**
- * shash_table_print - Prints a sorted hash table.
+ * shash_table_print_rev - Prints hash table in reverse order.
  * @ht: A pointer to table.
  */
 void shash_table_print_rev(const shash_table_t *ht)
