@@ -31,13 +31,13 @@ shash_table_t *shash_table_create(unsigned long int size)
 }
 
 /**
- * continue_table_get - function for continue shash_table_get process
+ * continue_table_set - function for continue shash_table_set process
  * @ht: hash table
  * @new: new node
  * @key: key
  * Return: 1 or 0.
  */
-int continue_table_get(shash_table_t *ht, shash_node_t *new, const char *key)
+int continue_table_set(shash_table_t *ht, shash_node_t *new, const char *key)
 {
 	shash_node_t *tmp;
 
@@ -104,6 +104,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		return (0);
 	new->key = strdup(key);
 	new->value = strdup(value);
+	new->next = ht->array[index];
+	ht->array[index] = new;
 	if (!new->key || !new->value)
 	{
 		if (new->key)
@@ -113,7 +115,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		free(new);
 		return (0);
 	}
-	return (continue_table_get(ht, new, key));
+	return (continue_table_set(ht, new, key));
 }
 
 /**
