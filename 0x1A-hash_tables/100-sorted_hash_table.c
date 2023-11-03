@@ -134,7 +134,7 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 	index = key_index((const unsigned char *)key, ht->size);
 	if (index >= ht->size)
 		return (NULL);
-	for (tmp = ht->array[index]; tmp && strcmp(tmp->key, key); tmp = tmp->next)
+	for (tmp = ht->shead; tmp && strcmp(tmp->key, key); tmp = tmp->snext)
 		;
 	if (!tmp)
 		return (NULL);
