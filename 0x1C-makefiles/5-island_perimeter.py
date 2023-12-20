@@ -13,15 +13,13 @@ def island_perimeter(grid):
     if type(grid[0]) is not list:
         return 0
     res = 0
+    bord = 0
     for i in range(len(grid)):
         for j in range(len(grid[i])):
             if grid[i][j] == 1:
-                if j - 1 >= 0 and grid[i][j - 1] == 0:
-                    res += 1
-                if j + 1 < len(grid[i]) and grid[i][j + 1] == 0:
-                    res += 1
-                if i + 1 < len(grid[i]) and grid[i + 1][j] == 0:
-                    res += 1
-                if i > 0 and grid[i - 1][j] == 0:
-                    res += 1
-    return res
+                res += 1
+                if j - 1 >= 0 and grid[i][j - 1] == 1:
+                    bord += 1
+                if i > 0 and grid[i - 1][j] == 1:
+                    bord += 1
+    return res * 4 - bord * 2
