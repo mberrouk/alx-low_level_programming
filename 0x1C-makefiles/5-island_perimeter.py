@@ -8,7 +8,7 @@ def island_perimeter(grid):
     """ returns the perimeter of the island described in grid.
     @grid: the grid.
     """
-    if grid == None or type(grid) is not list:
+    if grid is None or type(grid) is not list:
         return 0
     if type(grid[0]) is not list:
         return 0
