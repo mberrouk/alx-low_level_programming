@@ -25,13 +25,13 @@ int binary_search(int *array, size_t size, int value)
 			return (left);
 		else if (left == right)
 			return (-1);
-		middle = left + (right - 1) / 2;
+		middle = left + (right - left) / 2;
 		if (array[middle] == value)
 			return (middle);
 		if (array[middle] > value)
-			right = middle;
+			right = middle - 1;
 		else
-			left = middle;
+			left = middle + 1;
 	}
 	return (-1);
 }
